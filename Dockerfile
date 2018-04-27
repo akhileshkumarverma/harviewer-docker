@@ -20,7 +20,7 @@ RUN npm install && \
 FROM php:apache
 
 MAINTAINER marcello.desales@gmail.com
-LABEL github.com https://github.com/marcellodesales/harviewer
+LABEL github.com https://github.com/marcellodesales/harviewer-docker
 
 # Get the source built and deploy on Apache
 COPY --from=builder /build/webapp-build /var/www/html
