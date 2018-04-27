@@ -8,71 +8,66 @@ Up-to-date master - http://gitgrimbo.github.io/harviewer/master/ (and [https](ht
 * http://www.softwareishard.com/
 * Issue list: https://github.com/janodvarko/harviewer/issues
 * Project home: https://github.com/janodvarko/harviewer
+* Dockerized Solution: https://github.com/marcellodesales/harviewer-docker
 
-## License
+## Running
 
-HAR Viewer is free and open source software distributed under the [BSD License](https://github.com/janodvarko/harviewer/blob/master/webapp/license.txt).
-
-## Components
-
-* RequireJS: http://requirejs.org/
-* jQuery: http://jquery.com/
-* jQuery JSON plugin: Jim Dalton (jim.dalton@furrybrains.com), based on http://www.JSON.org/json2.js
-* Domplate + Domplate based templates: http://getfirebug.com
-* Downloadify: http://github.com/dcneiner/Downloadify/
-* SWFObject 2.0: http://code.google.com/p/swfobject/
-* Code Syntax Highlighter: http://alexgorbatchev.com/SyntaxHighlighter/
-* JSON Query: https://github.com/JasonSmith/jsonquery, http://www.sitepen.com/blog/2008/07/16/jsonquery-data-querying-beyond-jsonpath/
-
-## Build Tools
-
-* Ant: http://ant.apache.org/
-* JSDoc: http://usejsdoc.org/
-* Node.js: https://nodejs.org/
-* ESLint: http://eslint.org/
+```apache
+$ docker run -ti -p 8080:80 marcellodesales/harviewer
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Fri Apr 27 01:23:31.060437 2018] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.25 (Debian) PHP/7.2.4 configured -- resuming normal operations
+[Fri Apr 27 01:23:31.061116 2018] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+```
 
 ## Testing
 
-* Selenium: http://seleniumhq.org/
-* Intern: https://theintern.github.io/ (preferred, see [tests](tests/))
-* PHPUnit: http://www.phpunit.de/ (deprecated, see [tests](selenium/tests))
+<img src="https://preview.ibb.co/i4nr9H/Screen_Shot_2018_04_26_at_6_23_52_PM.png" alt="Screen_Shot_2018_04_26_at_6_23_52_PM">
 
-## Development
+* Request
 
-The HAR Viewer build process uses `Ant`, `Node.js` and `npm` as its build tools.
+```html
+$ curl http://localhost:8080/\?har\=examples/google.com.har
+<!doctype html>
+<html>
+<head>
+    <title>HTTP Archive Viewer 2.0.17</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/harViewer.css" type="text/css">
+</head>
+<body class="harBody">
+    <div id="content" version="2.0.17"></div>
+    <script src="scripts/jquery.js"></script>
+    <script data-main="scripts/harViewer" src="scripts/require.js"></script>
 
-Firstly, run `npm install` from the command line to install the `Node.js`/`npm` dependencies.
+<!-- Google Analytics -->
+<script>
+// Enable Google Analytics (for publicly hosted instances) in ant.properties file
+// by setting GOOGLE-ANALYTICS-PROFILE property to ID of your profile.
+var googleAnalyticsProfile = "";
+if (googleAnalyticsProfile && googleAnalyticsProfile.charAt(0) !== "@") {
 
-### Linting
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', googleAnalyticsProfile, 'auto');
+    ga('send', 'pageview');
 
-HAR Viewer uses [ESLint](http://eslint.org/) for linting.  It will be installed when you run `npm install` from the project root.
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
 
-To show lint errors only:
+</body>
+</html>
+```
 
-    npm run eslint
+* Backend
 
-To show lint errors and warnings:
-
-    npm run eslint-full
-
-### Build
-
-To see a list of available tasks, use `ant -p` at the command line.
-
-Go to the project directory and execute the following command:
-
-`ant build`
-
-(*Indicative build time - about 9 seconds.  Node.js v6.0.0*)
-
-### JSDoc
-
-Go to the project directory and execute the following command:
-
-`npm run jsdoc`
-
-### Version and Google Analytics
-
-Certain build properties can be overridden at the command line.  For example, to provide the `VERSION` and `GOOGLE-ANALYTICS-PROFILE` values:
-
-`ant build -DVERSION=3.0.0 -DGOOGLE-ANALYTICS-PROFILE=TRACKING_ID_HERE`
+```apache
+$ docker run -ti -p 8080:80 marcellodesales/harviewer
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+[Fri Apr 27 01:24:54.733246 2018] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.25 (Debian) PHP/7.2.4 configured -- resuming normal operations
+[Fri Apr 27 01:24:54.733325 2018] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+172.17.0.1 - - [27/Apr/2018:01:25:17 +0000] "GET /?har=examples/google.com.har HTTP/1.1" 200 858 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+172.17.0.1 - - [27/Apr/2018:01:25:32 +0000] "GET /?har=examples/google.com.har HTTP/1.1" 200 1215 "-" "curl/7.54.0"
+```
