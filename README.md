@@ -1,14 +1,9 @@
-Stable URL (v2.0.17, 21 March 2016) - http://www.softwareishard.com/har/viewer/
-
-Up-to-date master - http://gitgrimbo.github.io/harviewer/master/ (and [https](https://gitgrimbo.github.io/harviewer/master/))
-
 # HAR Viewer
 
-* Author: Jan Odvarko, odvarko@gmail.com
-* http://www.softwareishard.com/
-* Issue list: https://github.com/janodvarko/harviewer/issues
-* Project home: https://github.com/janodvarko/harviewer
-* Dockerized Solution: https://github.com/marcellodesales/harviewer-docker
+* http://www.softwareishard.com/har/viewer/
+* Dockerized Version: https://github.com/marcellodesales/harviewer-docker
+
+[![img](http://dockeri.co/image/marcellodesales/harviewer)](https://hub.docker.com/r/marcellodesales/harviewer)
 
 ## Running
 
